@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prediction Result</title>
+    <style>
+        body {
+            background-color: #ecf0f1;
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden; /* Prevent scrolling during loading */
+            animation: backgroundColor 5s infinite alternate; /* Background color animation */
+        }
+
+        @keyframes backgroundColor {
+            0% { background-color: #ecf0f1; }
+            50% { background-color: #e67e22; } /* Orange */
+            100% { background-color: #3498db; } /* Blue */
+        }
+
+        .result-container {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            position: relative;
+        }
+
+        .loader {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            animation: spin 1.5s linear infinite; /* Faster spin */
+            border: 8px solid transparent; /* Border for colorful effect */
+            border-top: 8px solid #3498db; /* Blue */
+            border-right: 8px solid #e67e22; /* Orange */
+            border-bottom: 8px solid #2ecc71; /* Green */
+            border-left: 8px solid #9b59b6; /* Purple */
+            margin: 20px auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .loading-text {
+            font-size: 1.5em;
+            color: #2c3e50;
+            margin-top: 10px;
+            opacity: 0; /* Hidden initially */
+            transition: opacity 0.5s ease;
+            animation: fadeIn 1s forwards; /* Fade in animation */
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .result {
+            display: none; /* Initially hidden */
+            color: #34495e;
+            font-size: 2em; /* Larger result text */
+            margin-top: 20px;
+            transition: opacity 0.5s ease; /* Smooth transition */
+            animation: slideIn 0.5s forwards; /* Slide in animation */
+        }
+
+        @keyframes slideIn {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+    </style>
+    <script>
+        window.onload = function() {
+            // Hide result text initially
+            document.getElementById('resultText').style.display = 'none';
+            // Show loader
+            document.getElementById('loader').style.display = 'block';
+            // Show loading text
+            document.getElementById('loadingText').style.opacity = 1;
+
+            // Wait for 2 seconds before showing the result
+            setTimeout(function() {
+                // Hide loader
+                document.getElementById('loader').style.display = 'none';
+                // Show the result text
+                document.getElementById('resultText').style.display = 'block';
+            }, 2000);
+        }
+    </script>
+</head>
+<body>
+
+<div class="result-container">
+    <div id="loader" class="loader"></div>
+    <h1>Popularity Prediction Result</h1>
+    <p id="loadingText" class="loading-text">Your Result</p>
+    <p id="resultText" class="result">
+        {% if prediction is not none %}
+            {{ 'Not Popular' if prediction == 0 else 'Popular' }}
+        {% else %}
+            Prediction not available.
+        {% endif %}
+    </p>
+</div>
+
+</body>
+</html>

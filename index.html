@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music Popularity Prediction</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background: linear-gradient(135deg, #6dd5ed, #2193b0);
+            position: relative;
+        }
+
+        .form-container {
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            width: 100%;
+            max-width: 400px;
+            position: relative;
+            z-index: 1;
+            animation: fadeIn 1s ease-in-out;
+            overflow-y: auto; /* Ensure scrollable if too tall */
+            max-height: 80vh; /* Prevent overflow of the viewport */
+        }
+
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 20px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 2px solid #3498db;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        input:focus {
+            border-color: #2980b9;
+            outline: none;
+        }
+
+        button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 12px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Sound wave animation */
+        .sound-wave {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 300px;
+            height: 100px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            animation: wave 1.5s infinite ease-in-out;
+        }
+
+        @keyframes wave {
+            0% {
+                transform: translateX(-50%) scale(1);
+            }
+            50% {
+                transform: translateX(-50%) scale(1.1);
+            }
+            100% {
+                transform: translateX(-50%) scale(1);
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="form-container">
+    <h1>Predict Music Popularity</h1>
+    <form id="predictionForm" method="post" action="/predict">
+        <input type="number" name="index" placeholder="Index" required>
+        <input type="text" name="artist_name" placeholder="Artist Name" required>
+        <input type="text" name="track_name" placeholder="Track Name" required>
+        <input type="number" name="track_id" placeholder="Track Id" required>
+        <input type="number" name="year" placeholder="Year" required min="1900" max="2024">
+        <input type="text" name="genre" placeholder="Genre" required>
+        <input type="number" name="danceability" placeholder="Danceability" step="0.01" required min="0" max="1">
+        <input type="number" name="energy" placeholder="Energy" step="0.01" required min="0" max="1">
+        <input type="number" name="key" placeholder="Key (0-11)" required min="0" max="11">
+        <input type="number" name="loudness" placeholder="Loudness" step="0.01" required>
+        <input type="number" name="mode" placeholder="Mode (0 or 1)" required min="0" max="1">
+        <input type="number" name="speechiness" placeholder="Speechiness" step="0.01" required min="0" max="1">
+        <input type="number" name="acousticness" placeholder="Acousticness" step="0.01" required min="0" max="1">
+        <input type="number" name="instrumentalness" placeholder="Instrumentalness" step="0.01" required min="0" max="1">
+        <input type="number" name="liveness" placeholder="Liveness" step="0.01" required min="0" max="1">
+        <input type="number" name="valence" placeholder="Valence" step="0.01" required min="0" max="1">
+        <input type="number" name="tempo" placeholder="Tempo" step="0.01" required>
+        <input type="number" name="duration_ms" placeholder="Duration in ms" required>
+        <input type="number" name="time_signature" placeholder="Time Signature" required>
+        <button type="submit">Predict Popularity</button>
+    </form>
+</div>
+
+<div class="sound-wave"></div>
+
+</body>
+</html>
