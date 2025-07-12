@@ -1,1 +1,13 @@
-nnndnnndnndn
+https://quantana.com.au/careers/
+
+->data science tools
+->sql
+->ml
+->mlops
+->dl
+->mongo db
+->langchain
+->agentic ai
+->cv
+->fast api
+->pytroch
